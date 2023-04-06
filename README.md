@@ -1,3 +1,3 @@
 # AHK-scripts
 
-Collection of various AHK scripts I have written for use in games/utility
+Collection of various AutoHotKey scripts I have written for use in games/utility
