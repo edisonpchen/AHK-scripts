@@ -18,10 +18,10 @@ key_exit := "]"
 key_hold := "RButton"
 key_hold2 := "LAlt"
 
-pixel_box_c := 2.2
-pixel_sens := 60
+pixel_box_c := 2.4
+pixel_sens := 40
 pixel_box_w_h := 3
-pixel_box_w_v := 1
+pixel_box_w_v := .5
 yellow := 0xffff00
 purp := 0xfe55fe
 red := 0xfe2323
@@ -63,7 +63,7 @@ loop2:
 		PixelSearch, , , leftbound_w, topbound_w, rightbound_w, bottombound_w, 0xffffff, 0, Fast RGB
 		if (flag && !ErrorLevel){
 			Click
-			sleep 550
+			sleep 525
 			flag = 0
 		}
 	}
