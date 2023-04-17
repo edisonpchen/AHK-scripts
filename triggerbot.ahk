@@ -50,21 +50,18 @@ return
      
 activate:
 SoundBeep, 500, 500
-settimer, loop2, 1
+settimer, loop, 1
 return
      
-loop2:
-	flag = 0
-	while GetKeyState(key_hold, "P"){
+loop:	
+	while GetKeyState(trigger){
 		PixelSearch, , , leftbound, topbound, rightbound, bottombound, purp, pixel_sens, Fast RGB
 		if (!ErrorLevel){
-			flag = 1
-		}
-		PixelSearch, , , leftbound_w, topbound_w, rightbound_w, bottombound_w, 0xffffff, 0, Fast RGB
-		if (flag && !ErrorLevel){
-			Click
-			sleep 525
-			flag = 0
+			PixelSearch, , , leftbound_w, topbound_w, rightbound_w, bottombound_w, 0xffffff, , Fast RGB
+			if (!ErrorLevel){
+				Click
+				Sleep 600
+			}
 		}
 	}
 return
