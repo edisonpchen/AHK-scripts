@@ -10,23 +10,22 @@ SetWinDelay, -1
 SetControlDelay, -1
 SendMode Input
 CoordMode, Pixel, Screen
-SoundBeep, 350, 500
+
+SoundBeep, 300, 500
 
 key_hold_mode := "\"
 key_exit := "]"
 
-key_hold := "RButton"
+trigger := "RButton"
 key_hold2 := "LAlt"
 
-pixel_box_c := 2.4
-pixel_sens := 40
+pixel_box_c := 2
+pixel_sens := 42
 pixel_box_w_h := 3
-pixel_box_w_v := .5
-yellow := 0xffff00
-purp := 0xfe55fe
-red := 0xfe2323
-magenta := 0xf307f6
-colors := "0xfe55fe|0x731185"
+pixel_box_w_v := .1
+
+yellow := 0xfafa37
+; max yellow: fafa37, max red: d92121
 
 leftbound := A_ScreenWidth / 2 - pixel_box_c
 rightbound := A_ScreenWidth / 2 + pixel_box_c
@@ -43,24 +42,23 @@ hotkey, %key_exit%, terminate
 return
      
 terminate:
-Sleep 250
 SoundBeep, 200, 500
 exitapp
 return
      
 activate:
-SoundBeep, 500, 500
+SoundBeep, 400, 500
 settimer, loop, 1
 return
-     
+
 loop:	
 	while GetKeyState(trigger){
-		PixelSearch, , , leftbound, topbound, rightbound, bottombound, purp, pixel_sens, Fast RGB
+		PixelSearch, , , leftbound, topbound, rightbound, bottombound, yellow, pixel_sens, Fast RGB
 		if (!ErrorLevel){
 			PixelSearch, , , leftbound_w, topbound_w, rightbound_w, bottombound_w, 0xffffff, , Fast RGB
 			if (!ErrorLevel){
 				Click
-				Sleep 600
+				Sleep 550
 			}
 		}
 	}
