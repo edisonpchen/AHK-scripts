@@ -20,7 +20,7 @@ trigger := "RButton"
 key_hold2 := "LAlt"
 
 pixel_box_c := 2
-pixel_sens := 42
+pixel_sens := 40
 pixel_box_w_h := 3
 pixel_box_w_v := 1
 
