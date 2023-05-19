@@ -24,7 +24,7 @@ pixel_sens := 42
 pixel_box_w_h := 3
 pixel_box_w_v := 1
 
-red := 0xd92121
+red := 0xd93333
 
 leftbound := floor(A_ScreenWidth / 2 - pixel_box_c)
 rightbound := floor(A_ScreenWidth / 2 + pixel_box_c)
@@ -59,7 +59,7 @@ loop:
 			PixelSearch, , , leftbound_w, topbound_w, rightbound_w, bottombound_w, 0xffffff, , Fast RGB
 			if (!ErrorLevel){
 				Click
-				Sleep 550
+				Sleep 500
 			}
 		}
 	}
