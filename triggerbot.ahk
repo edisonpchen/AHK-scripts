@@ -24,7 +24,7 @@ pixel_sens := 32
 pixel_box_w_h := 3
 pixel_box_w_v := 1
 
-yellow := 0xf8f832
+yellow := 0xfbfb32
 ; red:dc3232, max yellow:fafa37, max red:d92121 f8f842
 
 ; Calculate bounds
