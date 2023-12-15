@@ -1,4 +1,4 @@
-#NoEnv
+﻿#NoEnv
 #Persistent	
 #MaxThreadsPerHotkey 2
 #KeyHistory 0
@@ -15,31 +15,37 @@ SoundBeep, 300, 500
 
 key_hold_mode := "\"
 key_exit := "]"
+key_switch := "["
 trigger := "RButton"
 key_hold2 := "LAlt"
 
 ; Define pixel search parameters
 pixel_box_c := 2
-pixel_sens := 32
+pixel_sens := 42
 pixel_box_w_h := 3
 pixel_box_w_v := 1
 
-yellow := 0xfbfb32
-; red:dc3232, max yellow:fafa37, max red:d92121 f8f842
+; yellow := 0xdfdf32
+; red:dc3232, max yellow:fafa37, max red:d92121 f8f842 0xfbfb32 0xf1f132
 
 ; Calculate bounds
-leftbound := A_ScreenWidth // 2 - pixel_box_c
-rightbound := A_ScreenWidth // 2 + pixel_box_c
-topbound := A_ScreenHeight // 2 - pixel_box_c
-bottombound := A_ScreenHeight // 2 + pixel_box_c
+leftbound := (A_ScreenWidth // 2 - pixel_box_c)
+rightbound := (A_ScreenWidth // 2 + pixel_box_c)
+topbound := (A_ScreenHeight // 2 - pixel_box_c)
+bottombound := (A_ScreenHeight // 2 + pixel_box_c)
 
-leftbound_w := A_ScreenWidth // 2 - pixel_box_w_h
-rightbound_w := A_ScreenWidth // 2 + pixel_box_w_h
-topbound_w := A_ScreenHeight // 2 - pixel_box_w_v
-bottombound_w := A_ScreenHeight // 2 + pixel_box_w_v
+; MsgBox %leftbound% %rightbound% %topbound% %bottombound%
+
+leftbound_w := floor(A_ScreenWidth / 2 - pixel_box_w_h)
+rightbound_w := floor(A_ScreenWidth / 2 + pixel_box_w_h)
+topbound_w := floor(A_ScreenHeight / 2 - pixel_box_w_v)
+bottombound_w := floor(A_ScreenHeight / 2 + pixel_box_w_v)
+
+; MsgBox %leftbound_w% %rightbound_w% %topbound_w% %bottombound_w%
 
 hotkey, %key_hold_mode%, activate
 hotkey, %key_exit%, terminate
+hotkey, %key_switch%, switch
 return
      
 terminate:
@@ -49,16 +55,25 @@ return
      
 activate:
 SoundBeep, 400, 500
+yellow := 0xebeb42
+; f0f032
 settimer, loop, 1
 return
 
+switch:
+SoundBeep, 500, 500
+yellow := 0xffff42
+return
+
+; original values were 957, 539, 963, 541
+
 loop:
 	while GetKeyState(trigger){
-		PixelSearch, , , leftbound, topbound, rightbound, bottombound, yellow, pixel_sens, Fast RGB
+		PixelSearch, , , 957, 533, 963, 539, yellow, pixel_sens, Fast RGB
 		if (!ErrorLevel){
-			PixelSearch, , , leftbound_w, topbound_w, rightbound_w, bottombound_w, 0xffffff, , Fast RGB
+			PixelSearch, , , 957, 539, 963, 541, 0xffffff, , Fast RGB
 			if (!ErrorLevel){
-				Click
+				SendInput {Blind}l
 				Sleep 464
 			}
 		}
